@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    margin-top: 30px;
+    margin-top: 50px;
    /* width: 130vh;*/
     display: grid;
     resize: both;
@@ -24,7 +24,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     background-color: olive;
     gap: 5px;
-    border: 2px solid rebeccapurple;
+    /*border: 2px solid rebeccapurple;*/
     margin-left: 20%;
 }
 

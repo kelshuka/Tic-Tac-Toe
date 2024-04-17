@@ -1,22 +1,47 @@
 
+gameB = ['','','','','','','','',''];
 
-function gameBoard () {
-    const gameB = ['','','','','','','','',''];
+const Players = [];
 
-    return gameB 
-}
+const gamers = document.querySelector('.addPlayers');
+const foRm = document.getElementById('myForm');
+gamers.addEventListener('click', ()=> {
+    foRm.style.display = 'block';
+})
 
+foRm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const pl1 = document.querySelector("#pl1").value;
+    const pl2 = document.querySelector("#pl2").value;
+
+    Players.push(pl1);
+    Players.push(pl2);
+    console.log(Players);
+    event.target.style.display = "none";
+    console.log(plaYer.player1(Players));
+    console.log(Players);
+
+    let gaMer1 = plaYer.player1(Players);
+    playerTurn.textContent = `${gaMer1.discordName} please play `;
+
+    
+    return Players;
+    
+    
+});
+
+console.log(Players);
 
 const plaYer = (function () {
-    let name1 = prompt("Player one name is: ",'');
-    let name2 = prompt("Player two name is: ",'');
-    function player1() {
+    function player1(Player) {
+        let name1 = Player[0];
         const discordName = "player " + name1;
         let sign = 'X';
         return { discordName, sign }
     }
 
-    function player2 () {
+    function player2 (Player) {
+        let name2 = Player[1];
         const discordName = "player " + name2;
         let sign = 'O';
         return { discordName, sign }
@@ -25,30 +50,52 @@ const plaYer = (function () {
 
 })();
 
-function plaY () {
-    const arr = gameBoard();
-    let gaMer1 = plaYer.player1();
-    let gaMer2 = plaYer.player2();
 
-    let i = 1;
-    while (i<= arr.length/3) {
-        let ind1 = +prompt(`${gaMer1.discordName} please pick a number btw 1 & 9 `,);
-        if (arr[ind1-1] == '') arr[ind1-1] = gaMer1.sign;
-        else {
-            ind1 = +prompt('number taken, choose another ',);
-            arr[ind1-1] = gaMer1.sign;
-        }
+const numbs = document.querySelectorAll('.text');
+const playerTurn = document.querySelector('.playerTurn');
 
-        let ind2 = +prompt(`${gaMer2.discordName} please pick a number btw 1 & 9 `,);
-        if (arr[ind2-1] == '') arr[ind2-1] = gaMer2.sign;
-        else {
-            ind2 = +prompt('number taken, choose another ',);
-            arr[ind2-1] = gaMer2.sign;
-        }
+let gaMer1 = plaYer.player1(Players);
+let gaMer2 = plaYer.player2(Players);
         
-        i++;
-    }
+let currentPlayer = gaMer1.discordName;
+let currentSign = gaMer1.sign;
 
+numbs.forEach(contents => {
+    contents.addEventListener('click', (e) => {
+
+        let gaMer1 = plaYer.player1(Players);
+        let gaMer2 = plaYer.player2(Players);
+        //let currentPlayer = gaMer1.discordName;
+        //let currentSign = gaMer1.sign;
+
+            
+        //currentPlayer = currentPlayer == gaMer1.discordName ? gaMer2.discordName : gaMer1.discordName;
+        
+        playerTurn.textContent = `${currentPlayer} please play `;
+
+        let arr = gameB;
+        let ind = e.target.id;
+        console.log(ind);
+        if (arr[ind] == '') {
+            arr[ind] = currentSign;
+            e.target.innerText= currentSign;
+
+            
+            if (winNer (arr,gaMer1,gaMer2, currentPlayer) == false) {
+                playerTurn.innerHTML = `${currentPlayer} has won`;
+                
+            }
+            currentSign = currentSign == gaMer1.sign ? gaMer2.sign : gaMer1.sign;   
+            currentPlayer = currentPlayer == gaMer1.discordName ? gaMer2.discordName : gaMer1.discordName;
+            
+        } 
+        
+    });
+});
+
+ 
+function winNer (arr,currentSign, currentPlayer) {
+    //arr = gameB;
     let a = arr[0] == arr[1] && arr[1] == arr[2];
     let b = arr[3] == arr[4] && arr[4] == arr[5];
     let c = arr[6] == arr[7] && arr[7] == arr[8];
@@ -61,48 +108,51 @@ function plaY () {
 
 
     if (a) {
-            if (arr[0] == gaMer1.sign ) {
-                    alert(`The winner is ${gaMer1.discordName}`);
-            } else {alert(`The winner is ${gaMer2.discordName}`);}
+            if (arr[0] == currentSign ) {
+                playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (b) {
-        if (arr[3] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[3] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (c) {
-        if (arr[6] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[6] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (d) {
-        if (arr[3] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[3] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (e) {
-        if (arr[4] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[4] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if ( f) {
-        if (arr[5] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[5] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (g) {
-        if (arr[8] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[8] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (h) {
-        if (arr[2] == gaMer1.sign ) {
-            alert(`The winner is ${gaMer1.discordName}`);
-    } else {alert(`The winner is ${gaMer2.discordName}`);}
+        if (arr[2] == currentSign ) {
+            playerTurn.textContent = `The winner is ${currentPlayer}`;}
     }
-
     else {
-        alert('The game is a draw');
+        playerTurn.textContent = 'The game is a draw';
     }
-
-    return console.log(arr);
 }
     
+    
 
-plaY();
+
 //console.log(plaYer.player1());
 //console.log(plaYer.player2());
 
+
+//let ind2 = e.target.id;
+        //console.log(ind2);
+        //if (arr[ind2] == '') {
+         //   arr[ind2] = gaMer2.sign;
+         //   e.target.innerText = gaMer2.sign;
+        //} else {
+        //    playerTurn.textContent = `${gaMer2.discordName} number taken, choose another  `;
+         //   ind2 = e.target.id;
+                //ind2 = +prompt('number taken, choose another ',);
+         //   arr[ind2] = gaMer2.sign;
+         //   e.target.innerText = gaMer2.sign;
+        //}
