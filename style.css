@@ -9,7 +9,7 @@ body {
     margin: 20px;
     justify-content: flex-start;
     align-items: flex-start;*/
-    background-color: rgb(155, 155, 201);
+    background-color: rgb(199, 199, 224);
 }
 
 .container {
@@ -22,14 +22,40 @@ body {
     width: 60%;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
-    background-color: olive;
+    background-color: rgb(163, 163, 56);
     gap: 5px;
     /*border: 2px solid rebeccapurple;*/
     margin-left: 20%;
+    border-radius: 1vh;
 }
 
 .text {
-    text-align: center;
+    display: flex;
     padding-top: 20px;
-    background-color: whitesmoke;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(56, 136, 56);
+    font-size:90px;
+    font-weight: lighter;
+}
+
+.text:hover {
+    background-color: rgb(73, 73, 136);
+}
+
+.closeButtns {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    gap: 5%;
+    
+}
+
+.addPlayers,
+.clean {
+    border-radius: 0.5rem;
+    background-color: #27296d;
+    color: white;
+    padding: 6px 6px;
 }
