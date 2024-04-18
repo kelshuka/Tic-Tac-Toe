@@ -5,6 +5,7 @@ const Players = [];
 
 const gamers = document.querySelector('.addPlayers');
 const foRm = document.getElementById('myForm');
+
 gamers.addEventListener('click', ()=> {
     foRm.style.display = 'block';
 })
@@ -65,12 +66,7 @@ numbs.forEach(contents => {
 
         let gaMer1 = plaYer.player1(Players);
         let gaMer2 = plaYer.player2(Players);
-        //let currentPlayer = gaMer1.discordName;
-        //let currentSign = gaMer1.sign;
-
-            
-        //currentPlayer = currentPlayer == gaMer1.discordName ? gaMer2.discordName : gaMer1.discordName;
-        
+       
         playerTurn.textContent = `${currentPlayer} please play `;
 
         let arr = gameB;
@@ -80,11 +76,8 @@ numbs.forEach(contents => {
             arr[ind] = currentSign;
             e.target.innerText= currentSign;
 
+            winNer (arr,currentSign, currentPlayer);
             
-            if (winNer (arr,gaMer1,gaMer2, currentPlayer) == false) {
-                playerTurn.innerHTML = `${currentPlayer} has won`;
-                
-            }
             currentSign = currentSign == gaMer1.sign ? gaMer2.sign : gaMer1.sign;   
             currentPlayer = currentPlayer == gaMer1.discordName ? gaMer2.discordName : gaMer1.discordName;
             
@@ -95,15 +88,15 @@ numbs.forEach(contents => {
 
  
 function winNer (arr,currentSign, currentPlayer) {
-    //arr = gameB;
-    let a = arr[0] == arr[1] && arr[1] == arr[2];
-    let b = arr[3] == arr[4] && arr[4] == arr[5];
-    let c = arr[6] == arr[7] && arr[7] == arr[8];
-    let d = arr[0] == arr[3] && arr[3] == arr[6];
-    let e = arr[1] == arr[4] && arr[4] == arr[7];
-    let f = arr[2] == arr[5] && arr[5] == arr[8];
-    let g = arr[0] == arr[4] && arr[4] == arr[8];
-    let h = arr[6] == arr[4] && arr[4] == arr[2];
+    
+    let a = arr[0] == arr[1] && arr[0] == arr[2];
+    let b = arr[3] == arr[4] && arr[3] == arr[5];
+    let c = arr[6] == arr[7] && arr[6] == arr[8];
+    let d = arr[0] == arr[3] && arr[0] == arr[6];
+    let e = arr[1] == arr[4] && arr[1] == arr[7];
+    let f = arr[2] == arr[5] && arr[2] == arr[8];
+    let g = arr[0] == arr[4] && arr[0] == arr[8];
+    let h = arr[2] == arr[4] && arr[2] == arr[6];
 
 
 
@@ -117,42 +110,24 @@ function winNer (arr,currentSign, currentPlayer) {
         if (arr[6] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (d) {
-        if (arr[3] == currentSign ) {
+        if (arr[0] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (e) {
-        if (arr[4] == currentSign ) {
+        if (arr[1] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if ( f) {
-        if (arr[5] == currentSign ) {
+        if (arr[2] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (g) {
-        if (arr[8] == currentSign ) {
+        if (arr[0] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     } else if (h) {
         if (arr[2] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     }
-    else {
+    else if (arr[6] !== '' && arr[7] !== '' && arr[8] !== ''){
         playerTurn.textContent = 'The game is a draw';
     }
+    return false;
 }
     
-    
-
-
-//console.log(plaYer.player1());
-//console.log(plaYer.player2());
-
-
-//let ind2 = e.target.id;
-        //console.log(ind2);
-        //if (arr[ind2] == '') {
-         //   arr[ind2] = gaMer2.sign;
-         //   e.target.innerText = gaMer2.sign;
-        //} else {
-        //    playerTurn.textContent = `${gaMer2.discordName} number taken, choose another  `;
-         //   ind2 = e.target.id;
-                //ind2 = +prompt('number taken, choose another ',);
-         //   arr[ind2] = gaMer2.sign;
-         //   e.target.innerText = gaMer2.sign;
-        //}
