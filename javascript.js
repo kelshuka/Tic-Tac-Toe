@@ -31,7 +31,7 @@ foRm.addEventListener("submit", function (event) {
     
 });
 
-console.log(Players);
+
 
 const plaYer = (function () {
     function player1(Player) {
@@ -66,8 +66,12 @@ numbs.forEach(contents => {
 
         let gaMer1 = plaYer.player1(Players);
         let gaMer2 = plaYer.player2(Players);
+        
+
        
         playerTurn.textContent = `${currentPlayer} please play `;
+        currentPlayer = currentPlayer == gaMer1.discordName ? gaMer2.discordName : gaMer1.discordName;
+        
 
         let arr = gameB;
         let ind = e.target.id;
@@ -75,13 +79,13 @@ numbs.forEach(contents => {
         if (arr[ind] == '') {
             arr[ind] = currentSign;
             e.target.innerText= currentSign;
-
+            
             winNer (arr,currentSign, currentPlayer);
             
             currentSign = currentSign == gaMer1.sign ? gaMer2.sign : gaMer1.sign;   
-            currentPlayer = currentPlayer == gaMer1.discordName ? gaMer2.discordName : gaMer1.discordName;
-            
+                        
         } 
+        reStart ();
         
     });
 });
@@ -125,9 +129,23 @@ function winNer (arr,currentSign, currentPlayer) {
         if (arr[2] == currentSign ) {
             playerTurn.textContent = `The winner is ${currentPlayer}`;}
     }
-    else if (arr[6] !== '' && arr[7] !== '' && arr[8] !== ''){
+    else if (arr[0] !== '' && arr[1] !== '' && arr[2] !== '' && arr[3] !== '' && arr[4] !== '' 
+    && arr[5] !== '' && arr[6] !== '' && arr[7] !== '' && arr[8] !== ''){
         playerTurn.textContent = 'The game is a draw';
     }
     return false;
+}
+
+const restartButtn = document.querySelector('.clean');
+
+function reStart () {
+    restartButtn.addEventListener('click', () => {
+        gameB.fill('');
+        numbs.forEach(contents => {
+            contents.innerText = '';
+        })
+        playerTurn.textContent ='';
+        
+    })
 }
     
